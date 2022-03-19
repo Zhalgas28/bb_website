@@ -60,7 +60,7 @@ class MediaForm(admin.ModelAdmin):
     get_photo.short_description = 'Миниатюра'
 
 class ReviewsForm(admin.ModelAdmin):
-    list_display = ('id', 'name', 'movie', 'created_at')
+    list_display = ('id', 'user', 'movie', 'created_at')
     readonly_fields = ('created_at',)
 
 

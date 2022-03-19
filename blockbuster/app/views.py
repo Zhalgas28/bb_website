@@ -1,10 +1,11 @@
+from django.contrib import auth
 from django.contrib.auth import authenticate, logout, login
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import Q
 
-from .forms import UserRegistrationForm, UserLoginForm
-from .models import Movie, Celebrity, Genre
+from .forms import UserRegistrationForm, UserLoginForm, ReviewsForm
+from .models import Movie, Celebrity, Genre, Reviews
 
 
 class Index(ListView):
@@ -77,7 +78,6 @@ class CelebritySingle(DetailView):
     template_name = 'app/celebritysingle.html'
     context_object_name = 'celebrity'
 
-
 class FilterMoviesView(ListView):
     ''' Фильтрация фильмов '''
 
@@ -119,6 +119,7 @@ def user_register(request):
 
 
 def user_login(request):
+    ''' Аутентификация '''
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
@@ -131,5 +132,21 @@ def user_login(request):
 
 
 def user_logout(request):
+    ''' Выход с учетной записи '''
     logout(request)
     return redirect('login')
+
+
+def add_review(request, id):
+    ''' Добавление отзывов '''
+    form = ReviewsForm(request.POST)
+    movie = get_object_or_404(Movie, id=id)
+
+    if form.is_valid():
+        comment = Reviews()
+        comment.movie = movie
+        comment.user = auth.get_user(request)
+        comment.text = form.cleaned_data['text']
+        comment.save()
+        return redirect(movie.get_absolute_url())
+    return render(request, 'app/moviesingle.html')

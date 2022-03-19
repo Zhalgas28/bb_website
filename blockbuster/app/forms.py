@@ -20,9 +20,14 @@ class UserRegistrationForm(forms.ModelForm):
 
 
 class UserLoginForm(AuthenticationForm):
+    ''' Форма аутентификации пользователя '''
     username = forms.CharField(widget=forms.TextInput)
     password = forms.CharField(widget=forms.PasswordInput)
 
+
+class ReviewsForm(forms.Form):
+    ''' Форма отзыва '''
+    text = forms.CharField(widget=forms.Textarea)
 
 
 

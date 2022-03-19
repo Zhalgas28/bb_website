@@ -97,7 +97,7 @@
                                                             <div class="cast-left">
                                                                 <img src="{{ actor.photo.url }}" alt=""
                                                                      style="width: auto; height: 75px">
-                                                                <a href="#">{{ actor.name }}</a>
+                                                                <a href="{{ actor.get_absolute_url }}">{{ actor.name }}</a>
                                                             </div>
                                                             <p>{{ actor.profession }}</p>
                                                         </div>
@@ -134,11 +134,22 @@
                                         </div>
                                     </div>
                                     <div id="reviews" class="tab review">
+                                        {% if request.user.is_authenticated %}
+                                            <form method="post" action="{% url 'addreview' movie.id %}">
+                                            {% csrf_token %}
+                                            <label>
+                                                <input class="form-control" type="text" name="text">
+                                            </label>
+                                            <input type="submit" value="Send">
+                                        </form>
+                                        {% else %}
+                                            <h2>Для добавление комментариев нужно авторизоваться</h2>
+                                        {% endif %}
                                         <div class="row">
                                             {% for review in movie.reviews_set.all %}
                                                 <div class="mv-user-review-item">
                                                     <div class="user-infor">
-                                                        <h3>{{ review.name }}</h3>
+                                                        <h3>{{ review.user }}</h3>
                                                     </div>
                                                     <p>{{ review.text }}</p>
                                                     <div>

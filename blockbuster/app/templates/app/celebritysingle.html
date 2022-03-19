@@ -51,35 +51,41 @@
                                                 <p>{{ celebrity.description }}</p>
                                                 <p class="time"><a href="#">Биография <i
                                                         class="ion-ios-arrow-right"></i></a></p>
-                                                <div class="title-hd-sm">
-                                                    <h4>Фотки</h4>
-                                                </div>
-                                                <div class="mvsingle-item ov-item">
-                                                    {% for media in celebrity.media.all %}
-                                                        <a class="img-lightbox" data-fancybox-group="gallery"
-                                                           href="{{ media.photo.url }}"><img
-                                                                src="{{ media.photo.url }}" alt=""></a>
-                                                    {% endfor %}
-                                                </div>
-                                                <div class="title-hd-sm">
-                                                    <h4>Его фильмы</h4>
-                                                    <a href="#" class="time">Список фильмов<i
-                                                            class="ion-ios-arrow-right"></i></a>
-                                                </div>
-                                                <!-- movie cast -->
-                                                <div class="mvcast-item">
-                                                    <div class="cast-it">
-                                                        <div class="cast-left cebleb-film">
-                                                            <img src="images/uploads/film1.jpg" alt="">
-                                                            <div>
-                                                                <a href="#">X-Men: Apocalypse </a>
-                                                                <p class="time">Logan</p>
-                                                            </div>
-
-                                                        </div>
-                                                        <p>... 2016</p>
+                                                {% if celebrity.media %}
+                                                    <div class="title-hd-sm">
+                                                        <h4>Фотки</h4>
                                                     </div>
-                                                </div>
+                                                    <div class="mvsingle-item ov-item">
+                                                        {% for media in celebrity.media.all %}
+                                                            <a class="img-lightbox" data-fancybox-group="gallery"
+                                                               href="{{ media.photo.url }}"><img
+                                                                    src="{{ media.photo.url }}" alt=""></a>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% endif %}
+                                                {% if celebrity.filmography %}
+                                                    <div class="title-hd-sm">
+                                                        <h4>Его фильмы</h4>
+                                                        <a href="#" class="time">Список фильмов<i
+                                                                class="ion-ios-arrow-right"></i></a>
+                                                    </div>
+                                                    <!-- movie cast -->
+                                                    {% for film in celebrity.filmography.all %}
+                                                        <div class="mvcast-item">
+                                                            <div class="cast-it">
+                                                                <div class="cast-left cebleb-film">
+                                                                    <img src="{{ film.photo.url }}" alt=""
+                                                                         style="width: 75px">
+                                                                    <div>
+                                                                        <a href="{{ film.get_absolute_url }}">{{ film.name }}</a>
+                                                                    </div>
+
+                                                                </div>
+                                                                <p>{{ film.year }}</p>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                {% endif %}
                                             </div>
                                             <div class="col-md-4 col-xs-12 col-sm-12">
                                                 <div class="sb-it">

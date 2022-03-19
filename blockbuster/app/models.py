@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse_lazy
 
@@ -118,8 +119,8 @@ class Rating(models.Model):
 
 
 class Reviews(models.Model):
-    name = models.CharField('Имя', max_length=155)
-    email = models.EmailField()
+    ''' Отзывы '''
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField('Текст', max_length=10000)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, verbose_name='Фильм')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Добавлено в')
@@ -131,3 +132,4 @@ class Reviews(models.Model):
     class Meta:
         verbose_name = 'Отзыв'
         verbose_name_plural = 'Отзывы'
+        ordering = ('-created_at',)
