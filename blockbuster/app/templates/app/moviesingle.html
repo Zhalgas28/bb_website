@@ -1,0 +1,228 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ movie.name }} | Киносайт{% endblock %}
+
+{% block content %}
+    <div class="hero mv-single-hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- <h1> movie listing - list</h1>
+                    <ul class="breadcumb">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li> <span class="ion-ios-arrow-right"></span> movie listing</li>
+                    </ul> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="page-single movie-single movie_single">
+        <div class="container">
+            <div class="row ipad-width2">
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="movie-img sticky-sb">
+                        <img src="{{ movie.photo.url }}" alt="">
+                        <div class="movie-btn">
+                            <div class="btn-transform transform-vertical red">
+                                <div><a href="#" class="item item-1 redbtn"> <i class="ion-play"></i> Watch Trailer</a>
+                                </div>
+                                <div><a href="{{ movie.trailer }}"
+                                        class="item item-2 redbtn fancybox-media hvr-grow"><i class="ion-play"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                    <div class="movie-single-ct main-content">
+                        <h1 class="bd-hd">{{ movie.name }} <span>{{ movie.year }}</span></h1>
+                        <div class="movie-rate">
+                            <div class="rate">
+                                <i class="ion-android-star"></i>
+                                <p><span>8.1</span> /10<br>
+                                    <span class="rv">56 Reviews</span>
+                                </p>
+                            </div>
+                            <div class="rate-star">
+                                <p>Rate This Movie: </p>
+                                <i class="ion-ios-star"></i>
+                                <i class="ion-ios-star"></i>
+                                <i class="ion-ios-star"></i>
+                                <i class="ion-ios-star"></i>
+                                <i class="ion-ios-star"></i>
+                                <i class="ion-ios-star"></i>
+                                <i class="ion-ios-star"></i>
+                                <i class="ion-ios-star"></i>
+                                <i class="ion-ios-star-outline"></i>
+                            </div>
+                        </div>
+                        <div class="movie-tabs">
+                            <div class="tabs">
+                                <ul class="tab-links tabs-mv">
+                                    <li class="active"><a href="#overview">Фильм</a></li>
+                                    <li><a href="#reviews"> Отзывы</a></li>
+                                    <li><a href="#cast"> Актеры </a></li>
+                                    <li><a href="#media"> Медиа</a></li>
+                                    <li><a href="#moviesrelated"> Похожие фильмы</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="overview" class="tab active">
+                                        <div class="row">
+                                            <div class="col-md-8 col-sm-12 col-xs-12">
+                                                <p>{{ movie.description }}</p>
+                                                <div class="title-hd-sm">
+                                                    <h4>Photos</h4>
+                                                    <a href="#media" class="time">All photos<i
+                                                            class="ion-ios-arrow-right"></i></a>
+                                                </div>
+                                                <div class="mvsingle-item ov-item">
+                                                    {% for media in movie.media.all %}
+                                                        <a class="img-lightbox" data-fancybox-group="gallery"
+                                                           href="{{ media.photo.url }}"><img
+                                                                src="{{ media.photo.url }}" alt=""
+                                                                style="width: 150px; height: 100px"></a>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="title-hd-sm">
+                                                    <h4>cast</h4>
+                                                    <a href="#cast" class="time">Full Cast & Crew <i
+                                                            class="ion-ios-arrow-right"></i></a>
+                                                </div>
+                                                <!-- movie cast -->
+                                                <div class="mvcast-item">
+                                                    {% for actor in movie.actors.all %}
+                                                        <div class="cast-it">
+                                                            <div class="cast-left">
+                                                                <img src="{{ actor.photo.url }}" alt=""
+                                                                     style="width: auto; height: 75px">
+                                                                <a href="#">{{ actor.name }}</a>
+                                                            </div>
+                                                            <p>{{ actor.profession }}</p>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-xs-12 col-sm-12">
+                                                <div class="sb-it">
+                                                    <h6>Режиссер: </h6>
+                                                    <p>
+                                                        <a href="{{ movie.director.get_absolute_url }}">{{ movie.director }}</a>
+                                                    </p>
+                                                </div>
+                                                <div class="sb-it">
+                                                    <h6>Актеры: </h6>
+                                                    <p>{% for actor in movie.actors.all %}
+                                                        <a href="{{ actor.get_absolute_url }}">{{ actor.name }}, </a>{% endfor %}
+                                                    </p>
+                                                </div>
+                                                <div class="sb-it">
+                                                    <h6>Жанры:</h6>
+                                                    <p>{% for genre in movie.genre.all %}
+                                                        <a href="#">{{ genre.name }}, </a>{% endfor %}</p>
+                                                </div>
+                                                <div class="sb-it">
+                                                    <h6>Релиз</h6>
+                                                    <p>{{ movie.release_date }}</p>
+                                                </div>
+                                                <div class="sb-it">
+                                                    <h6>Продолжительность:</h6>
+                                                    <p>{{ movie.run_time }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="reviews" class="tab review">
+                                        <div class="row">
+                                            {% for review in movie.reviews_set.all %}
+                                                <div class="mv-user-review-item">
+                                                    <div class="user-infor">
+                                                        <h3>{{ review.name }}</h3>
+                                                    </div>
+                                                    <p>{{ review.text }}</p>
+                                                    <div>
+                                                        <p class="time">
+                                                            {{ review.created_at }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div id="cast" class="tab">
+                                        <div class="row">
+                                            <!-- //== -->
+                                            <div class="title-hd-sm">
+                                                <h4>Режиссер</h4>
+                                            </div>
+                                            <div class="mvcast-item">
+                                                <div class="cast-it">
+                                                    <div class="cast-left">
+                                                        <a href="{{ movie.director.get_absolute_url }}">{{ movie.director }}</a>
+                                                    </div>
+                                                    <p>{{ movie.director.profession }}</p>
+                                                </div>
+                                            </div>
+
+                                            <!-- //== -->
+                                            <div class="title-hd-sm">
+                                                <h4>Актеры</h4>
+                                            </div>
+                                            <div class="mvcast-item">
+                                                {% for actor in movie.actors.all %}
+                                                    <div class="cast-it">
+                                                        <div class="cast-left">
+                                                            <img src="{{ actor.photo.url }}" alt="Фото"
+                                                                 style="height: 75px">
+                                                            <a href="{{ actor.get_absolute_utl }}">{{ actor.name }}</a>
+                                                        </div>
+                                                        <p>{{ actor.profession }}</p>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="media" class="tab">
+                                        <div class="row">
+                                            <div class="mvsingle-item">
+                                                {% for media in movie.media.all %}
+                                                    <a class="img-lightbox" data-fancybox-group="gallery"
+                                                       href="{{ media.photo.url }}"><img
+                                                            src="{{ media.photo.url }}"
+                                                            alt="" style="height: 150px;"></a>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="moviesrelated" class="tab">
+                                        <div class="row">
+                                            <div class="movie-item-style-2">
+                                                <img src="images/uploads/mv1.jpg" alt="">
+                                                <div class="mv-item-infor">
+                                                    <h6><a href="#">oblivion <span>(2012)</span></a></h6>
+                                                    <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10
+                                                    </p>
+                                                    <p class="describe">Earth's mightiest heroes must come together and
+                                                        learn to fight as a team if they are to stop the mischievous
+                                                        Loki
+                                                        and his alien army from enslaving humanity...</p>
+                                                    <p class="run-time"> Run Time: 2h21’ . <span>MMPA: PG-13 </span> .
+                                                        <span>Release: 1 May 2015</span></p>
+                                                    <p>Director: <a href="#">Joss Whedon</a></p>
+                                                    <p>Stars: <a href="#">Robert Downey Jr.,</a> <a href="#">Chris
+                                                        Evans,</a> <a href="#"> Chris Hemsworth</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

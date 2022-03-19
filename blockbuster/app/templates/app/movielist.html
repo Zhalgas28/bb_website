@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block title %}Список фильмов | Киносайт{% endblock %}
+
+{% block content %}
+    <div class="hero common-hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="hero-ct">
+                        <h1> Список фильмов</h1>
+                        <ul class="breadcumb">
+                            <li class="active"><a href="{% url 'home' %}">Главная</a></li>
+                            <li><span class="ion-ios-arrow-right"></span> Список фильмов</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-single movie_list">
+        <div class="container">
+            <div class="row ipad-width2">
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                    {% for movie in movies %}
+                        <div class="movie-item-style-2">
+                            <img src="{{ movie.photo.url }}" alt="" style="width: 129.7px;">
+                            <div class="mv-item-infor">
+                                <h6><a href="{{ movie.get_absolute_url }}">{{ movie.name }}
+                                    <span>({{ movie.year }})</span></a></h6>
+                                <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
+                                <p class="describe">{{ movie.description | safe | truncatewords_html:20 }}</p>
+                                <p class="run-time"> Продолжительность: {{ movie.run_time }}
+                                    <span>Релиз: {{ movie.release_date | date:"d F Y" }}</span></p>
+                                <p>Режиссер: <a href="{{ movie.director.get_absolute_url }}">{{ movie.director }}</a>
+                                </p>
+                                <p>Актеры: {% for actor in movie.actors.all %}
+                                    <a href="{{ actor.get_absolute_url }}">{{ actor.name }}</a>
+                                    | {% endfor %}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% if page_obj.has_other_pages %}
+                        <div class="topbar-filter">
+                            <div class="pagination2">
+                                <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}:</span>
+                                {% for p in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == p %}
+                                        <a class="active">{{ p }}</a>
+                                    {% else %}
+                                        <a href="?page={{ p }}">{{ p }}</a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="sidebar">
+                        <div class="searh-form">
+                            <h4 class="sb-title">Search for movie</h4>
+                            <form class="form-style-1" action="{% url 'filter' %}" method="get">
+                                <div class="row">
+                                    <div class="col-md-12 form-it">
+                                        <label>Имя фильма</label>
+                                        <input type="text" name="Имя" placeholder="Название">
+                                    </div>
+                                    <div class="col-md-12 form-it">
+                                        <label>Жанры</label>
+                                        <div class="group-ip">
+                                            <select
+                                                    name="genre" multiple="" class="ui fluid dropdown">
+                                                <option value="range">Выберите жанры</option>
+                                                {% for genre in genres %}
+                                                    <option value="{{ genre.id }}">{{ genre.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-12 form-it">
+                                        <label>Дата выхода</label>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <select name="year1">
+                                                    <option value="range">От</option>
+                                                    <option value="1990">1990</option>
+                                                    <option value="2000">2000</option>
+                                                    <option value="2010">2010</option>
+                                                    <option value="2015">2015</option>
+                                                    <option value="2020">2020</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select name="year2">
+                                                    <option value="range">До</option>
+                                                    <option value="2000">2000</option>
+                                                    <option value="2010">2010</option>
+                                                    <option value="2015">2015</option>
+                                                    <option value="2020">2020</option>
+                                                    <option value="2022">2022</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 ">
+                                        <input class="submit" type="submit" value="submit">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

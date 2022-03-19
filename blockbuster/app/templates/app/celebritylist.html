@@ -1,0 +1,132 @@
+{% extends  'base.html' %}
+
+{% block title %}Знаменитости | Киносайт{% endblock %}
+
+{% block content %}
+    <div class="hero common-hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="hero-ct">
+                        <h1>Знаменитости</h1>
+                        <ul class="breadcumb">
+                            <li class="active"><a href="{% url 'home' %}">Главная</a></li>
+                            <li><span class="ion-ios-arrow-right"></span> Знаменитости</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- celebrity list section-->
+    <div class="page-single">
+        <div class="container">
+            <div class="row ipad-width2">
+                <div class="col-md-9 col-sm-12 col-xs-12">
+                    <div class="topbar-filter">
+                        <p class="pad-change">Found <span>1,608 celebrities</span> in total</p>
+                        <label>Sort by:</label>
+                        <select>
+                            <option value="popularity">Popularity Descending</option>
+                            <option value="popularity">Popularity Ascending</option>
+                            <option value="rating">Rating Descending</option>
+                            <option value="rating">Rating Ascending</option>
+                            <option value="date">Release date Descending</option>
+                            <option value="date">Release date Ascending</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        {% for celebrity in celebrities %}
+                            <div class="col-md-12">
+                                <div class="ceb-item-style-2">
+                                    <img src="{{ celebrity.photo.url }}" alt="" style="height: 130px">
+                                    <div class="ceb-infor">
+                                        <h2><a href="{{ celebrity.get_absolute_url }}">{{ celebrity.name }}</a></h2>
+                                        <span>{{ celebrity.profession }}</span>
+                                        <p>{{ celebrity.description | truncatewords_html:20 | safe }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% if page_obj.has_other_pages %}
+                    <div class="topbar-filter">
+                        <div class="pagination2">
+                            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}:</span>
+                            {% for p in page_obj.paginator.page_range %}
+                                {% if page_obj.number == p %}
+                                    <a class="active">{{ p }}</a>
+                                {% else %}
+                                    <a href="?page={{ p }}">{{ p }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+                </div>
+                <div class="col-md-3 col-xs-12 col-sm-12">
+                    <div class="sidebar">
+                        <div class="searh-form">
+                            <h4 class="sb-title">Search celebrity</h4>
+                            <form class="form-style-1 celebrity-form" action="#">
+                                <div class="row">
+                                    <div class="col-md-12 form-it">
+                                        <label>Celebrity name</label>
+                                        <input type="text" placeholder="Enter keywords">
+                                    </div>
+                                    <div class="col-md-12 form-it">
+                                        <label>Celebrity Letter</label>
+                                        <select>
+                                            <option value="range">A</option>
+                                            <option value="saab">B</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 form-it">
+                                        <label>Category</label>
+                                        <select>
+                                            <option value="range">Actress</option>
+                                            <option value="saab">Others</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 form-it">
+                                        <label>Year of birth</label>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <select>
+                                                    <option value="range">1970</option>
+                                                    <option value="number">Other</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select>
+                                                    <option value="range">1990</option>
+                                                    <option value="number">others</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 ">
+                                        <input class="submit" type="submit" value="submit">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="celebrities">
+                            <h4 class="sb-title">Режиссеры</h4>
+                            {% for director in directors %}
+                                <div class="celeb-item">
+                                    <a href="{{ director.photo.url }}"><img src="{{ director.photo.url }}" alt="" style="width: 70px"></a>
+                                    <div class="celeb-author">
+                                        <h6><a href="{{ celebrity.get_absolute_url }}">{{ director.name }}</a></h6>
+                                        <span>Режиссер</span>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end of celebrity list section-->
+{% endblock %}

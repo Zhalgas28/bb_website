@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход | Киносайт{% endblock %}
+
+{% block content %}
+    <div class="hero common-hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="hero-ct">
+                        <h1> Вход</h1>
+                        <ul class="breadcumb">
+                            <li class="active"><a href="{% url 'home' %}">Главная</a></li>
+                            <li><span class="ion-ios-arrow-right"></span> Вход</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if error %}
+        <h1 class="error-h1">
+            {{ error }}
+        </h1>
+    {% endif %}
+    <div id="login-box">
+        <div class="left">
+            <h1>Вход</h1>
+            <form method="post" action=".">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Username"/>
+                <input type="password" name="password" placeholder="Password"/>
+                <input type="submit" name="signup_submit" value="Sign me up"/>
+            </form>
+        </div>
+
+        <div class="right">
+            <span class="loginwith">Sign up with<br/>social network</span>
+
+            <button class="social-signin facebook">Log up with facebook</button>
+            <button class="social-signin twitter">Log up with Twitter</button>
+            <button class="social-signin google">Log up with Google+</button>
+        </div>
+        <div class="or">OR</div>
+    </div>
+
+    <div class="errors">
+        <ul>
+            <li class="error">{{ form.email.errors }}</li>
+            <li class="error">{{ form.password.errors }}</li>
+            <li class="error">{{ form.password.errors }}</li>
+        </ul>
+    </div>
+{% endblock %}

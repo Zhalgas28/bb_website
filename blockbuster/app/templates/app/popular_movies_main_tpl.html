@@ -1,0 +1,32 @@
+<div class="title-hd">
+    <h2>Популярные</h2>
+    <a href="{% url 'movies' %}" class="viewall">Все фильмы <i class="ion-ios-arrow-right"></i></a>
+</div>
+<div class="tabs">
+    <div class="tab-content">
+        <div id="tab1" class="tab active">
+            <div class="row">
+                <div class="slick-multiItem">
+                    {% for popular_movie in popular_movies %}
+                        <div class="slide-it">
+                            <div class="movie-item">
+                                <div class="mv-img">
+                                    <img src="{{ popular_movie.photo.url }}" alt="" width="185"
+                                         height="284">
+                                </div>
+                                <div class="hvr-inner">
+                                    <a href="{{ popular_movie.get_absolute_url }}"> Read more <i
+                                            class="ion-android-arrow-dropright"></i> </a>
+                                </div>
+                                <div class="title-in">
+                                    <h6><a href="{{ popular_movie.get_absolute_url }}">{{ popular_movie.name }}</a></h6>
+                                    <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
