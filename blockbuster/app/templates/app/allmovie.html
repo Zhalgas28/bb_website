@@ -36,7 +36,8 @@
                             <div class="movie-item-style-2 movie-item-style-1">
                                 <img src="{{ movie.photo.url }}" alt="">
                                 <div class="hvr-inner">
-                                    <a href="{{ movie.get_absolute_url }}"> Read more <i class="ion-android-arrow-dropright"></i>
+                                    <a href="{{ movie.get_absolute_url }}"> Read more <i
+                                            class="ion-android-arrow-dropright"></i>
                                     </a>
                                 </div>
                                 <div class="mv-item-infor">
@@ -46,18 +47,20 @@
                             </div>
                         {% endfor %}
                     </div>
-                    <div class="topbar-filter">
-                        <div class="pagination2">
-                            <span>Page 1 of 2:</span>
-                            <a class="active" href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">...</a>
-                            <a href="#">78</a>
-                            <a href="#">79</a>
-                            <a href="#"><i class="ion-arrow-right-b"></i></a>
+                    {% if page_obj.has_other_pages %}
+                        <div class="topbar-filter">
+                            <div class="pagination2">
+                                <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}:</span>
+                                {% for p in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == p %}
+                                        <a class="active">{{ p }}</a>
+                                    {% else %}
+                                        <a href="?page={{ p }}">{{ p }}</a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

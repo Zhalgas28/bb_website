@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.db.models import Q
 
 from .forms import UserRegistrationForm, UserLoginForm, ReviewsForm
-from .models import Movie, Celebrity, Genre, Reviews
+from .models import Movie, Celebrity, Genre, Reviews, Profession
 
 
 class Index(ListView):
@@ -69,6 +69,7 @@ class CelebrityList(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['directors'] = Celebrity.objects.filter(profession__name='Режиссер')[:4]
+        context['professions'] = Profession.objects.all()
         return context
 
 
@@ -150,3 +151,18 @@ def add_review(request, id):
         comment.save()
         return redirect(movie.get_absolute_url())
     return render(request, 'app/moviesingle.html')
+
+
+class FilterCelebritiesList(CelebrityList, ListView):
+    ''' Фильтр знаменитостей '''
+    def get_queryset(self):
+        queryset = Celebrity.objects.filter(
+            Q(name__icontains=self.request.GET.get('name')) |
+            Q(profession__in=self.request.GET.getlist('professions'))
+        )
+        return queryset
+    # queryset = Movie.objects.filter(
+    #             Q(name__icontains=self.request.GET.get("Имя")) |
+    #             Q(genre__in=self.request.GET.getlist('genre')) |
+    #             Q(year__range=(int(self.request.GET.get('year1')), int(self.request.GET.get('year2'))))
+    #         )

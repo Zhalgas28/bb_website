@@ -1,53 +1,48 @@
+{% load static %}
 <footer class="ht-footer">
     <div class="container">
         <div class="flex-parent-ft">
             <div class="flex-child-ft item1">
-                <a href="index.html"><img class="logo" src="images/logo1.png" alt=""></a>
+                <a href="index.html"><img class="logo" src="{% static 'images/logo1.png' %}" alt="Логотип сайта"></a>
                 <p>5th Avenue st, manhattan<br>
                     New York, NY 10001</p>
-                <p>Call us: <a href="#">(+01) 202 342 6789</a></p>
+                <p>Call us: <a href="tel:+77773416790">+7(777)-341-67-90</a></p>
             </div>
             <div class="flex-child-ft item2">
-                <h4>Resources</h4>
+                <h4>Мои соцсети</h4>
                 <ul>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Blockbuster</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Forums</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Help Center</a></li>
+                    <li><a href="https://www.instagram.com/kabdulov_28/">Instagram</a></li>
+                    <li><a href="https://vk.com/freenzy">VK</a></li>
+                    <li><a href="mailto:kabdulov1728@gmail.com">E-mail</a></li>
                 </ul>
             </div>
             <div class="flex-child-ft item3">
-                <h4>Legal</h4>
+                <h4>Киносайты</h4>
                 <ul>
-                    <li><a href="#">Terms of Use</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Security</a></li>
+                    <li><a href="https://www.kinopoisk.ru/">Kinopoisk.ru</a></li>
+                    <li><a href="https://www.afisha.ru/">Afisha.ru</a></li>
+                    <li><a href="https://www.kinonews.ru/">Kinonews.ru</a></li>
                 </ul>
             </div>
             <div class="flex-child-ft item4">
-                <h4>Account</h4>
+                <h4>Другие работы</h4>
                 <ul>
-                    <li><a href="#">My Account</a></li>
-                    <li><a href="#">Watchlist</a></li>
-                    <li><a href="#">Collections</a></li>
-                    <li><a href="#">User Guide</a></li>
+                    <li><a href="https://github.com/Zhalgas28/">GitHub</a></li>
                 </ul>
             </div>
             <div class="flex-child-ft item5">
-                <h4>Newsletter</h4>
-                <p>Subscribe to our newsletter system now <br> to get latest news from us.</p>
+                <h4>Рассылка</h4>
+                <p>Оставьте свой email для получение  <br> сообщении о выходе новых фильмов</p>
                 <form action="#">
-                    <input type="text" placeholder="Enter your email...">
+                    <input type="text" placeholder="Введите ваш email...">
+                    <a href="#" class="btn">Subscribe now <i class="ion-ios-arrow-forward"></i></a>
                 </form>
-                <a href="#" class="btn">Subscribe now <i class="ion-ios-arrow-forward"></i></a>
             </div>
         </div>
     </div>
     <div class="ft-copyright">
         <div class="ft-left">
-            <p>© 2017 Blockbuster. All Rights Reserved. Designed by leehari.</p>
+            <p>© 2022 Blockbuster | Киносайт</p>
         </div>
         <div class="backtotop">
             <p><a href="#" id="back-to-top">Back to top <i class="ion-ios-arrow-thin-up"></i></a></p>
