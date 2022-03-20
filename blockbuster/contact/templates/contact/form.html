@@ -1,0 +1,9 @@
+<div class="flex-child-ft item5">
+    <h4>Рассылка</h4>
+    <p>Оставьте свой email для получение <br> сообщении о выходе новых фильмов</p>
+    <form action="{% url 'contact' %}" method="post">
+        {% csrf_token %}
+        <input name="email" type="text" placeholder="Введите ваш email...">
+        <input type="submit" value="Отправить">
+    </form>
+</div>

@@ -3,3 +3,4 @@ pillow
 psycopg2
 django-debug-toolbar
 djangorestframework
+celery

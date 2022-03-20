@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'app.apps.AppConfig',
+    'contact.apps.ContactConfig',
 ]
 
 MIDDLEWARE = [
@@ -119,4 +120,10 @@ CACHES = {
     }
 }
 
+
+EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'blackhorse11zhalgas@gmail.com'
+EMAIL_HOST_PASSWORD = 'manutd11zhalgas'
+EMAIL_PORT = 465
 
