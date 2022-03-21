@@ -1,5 +1,6 @@
 import os.path
 from pathlib import Path
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-mo*--75p%8i!$)w1#5!--p)ty_oymamn$szl#o9v*y6u+1udi9'
@@ -7,7 +8,6 @@ SECRET_KEY = 'django-insecure-mo*--75p%8i!$)w1#5!--p)ty_oymamn$szl#o9v*y6u+1udi9
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -54,7 +54,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'blockbuster.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -65,7 +64,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -120,10 +118,17 @@ CACHES = {
     }
 }
 
-
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'blackhorse11zhalgas@gmail.com'
 EMAIL_HOST_PASSWORD = 'manutd11zhalgas'
 EMAIL_PORT = 465
 
+REDIS_HOST = '0.0.0.0'
+REDIS_PORT = '6379'
+CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
