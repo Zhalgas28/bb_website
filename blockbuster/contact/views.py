@@ -5,7 +5,6 @@ from .forms import ContactForm
 from .models import Contact
 from .service import send
 
-
 class ContactView(CreateView):
     model = Contact
     form_class = ContactForm
