@@ -99,9 +99,13 @@ class RatingStar(models.Model):
     ''' Звезды рейтинга '''
     star = models.PositiveSmallIntegerField(default=0, verbose_name='звезда')
 
+    def __str__(self):
+        return str(self.star)
+
     class Meta:
         verbose_name = 'Звезда(у)'
         verbose_name_plural = 'Звезды'
+        ordering = ('-star',)
 
 
 class Rating(models.Model):

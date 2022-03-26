@@ -14,5 +14,5 @@ urlpatterns = [
     path('register/', user_register, name='register'),
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),
-    path('addreview/<int:id>/', add_review, name='addreview')
+    path('addreview/<str:slug>/', add_review, name='addreview'),
 ]

@@ -1346,7 +1346,6 @@ output {
 }
 
 select,
-textarea,
 input[type="text"],
 input[type="password"],
 input[type="datetime"],
@@ -9907,14 +9906,14 @@ input[type="submit"] {
     margin-top: 28px;
     width: 120px;
     height: 32px;
-    background: #16a085;
+    background: #173c5b;
     border: none;
-    border-radius: 2px;
+    border-radius: 5px;
     color: #FFF;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     text-transform: uppercase;
-    transition: 0.1s ease;
+    transition: 0.2s ease;
     cursor: pointer;
 }
 
@@ -10012,4 +10011,52 @@ button.social-signin.google {
     color: red;
     text-align: center;
 }
+
+.zhk-textarea {
+    width: 100%;
+    background: #020d18;
+    border: none;
+    margin-top: 57.1px;
+    border-bottom: 1px solid white;
+    color: white;
+    font-family: inherit;
+}
+
+
+.rating {
+    overflow: hidden;
+    vertical-align: bottom;
+    display: inline-block;
+    width: 155px;
+    height: 30px;
+}
+
+.rating > input {
+    opacity: 0;
+    margin-right: -100%;
+}
+
+.rating > label {
+    position: relative;
+    display: block;
+    float: right;
+    background: url('../images/uploads/star-off-big.png');
+    background-size: 30px 30px;
+}
+
+.rating > label:before {
+    display: block;
+    opacity: 0;
+    content: '';
+    width: 30px;
+    height: 30px;
+    background: url('../images/uploads/star-on-big.png');
+    background-size: 30px 30px;
+    transition: opacity 0.2s linear;
+}
+
+.rating > label:hover:before, .rating > label:hover ~ label:before, .rating:not(:hover) > :checked ~ label:before {
+    opacity: 1;
+}
+
 

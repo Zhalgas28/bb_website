@@ -2,6 +2,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django import forms
 
+from .models import RatingStar, Rating
+
 
 class UserRegistrationForm(forms.ModelForm):
     ''' Форма для регистрации пользователей '''
@@ -30,4 +32,10 @@ class ReviewsForm(forms.Form):
     text = forms.CharField(widget=forms.Textarea)
 
 
+class RatingForm(forms.ModelForm):
+    star = forms.ModelChoiceField(queryset=RatingStar.objects.all(), widget=forms.RadioSelect(), empty_label=None)
+
+    class Meta:
+        model = Rating
+        fields = ('star',)
 

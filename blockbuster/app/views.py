@@ -1,11 +1,13 @@
 from django.contrib import auth
 from django.contrib.auth import authenticate, logout, login
+from django.http import HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
+from django.views import View
 from django.views.generic import ListView, DetailView, CreateView
-from django.db.models import Q
+from django.db.models import Q, Count
 
-from .forms import UserRegistrationForm, UserLoginForm, ReviewsForm
-from .models import Movie, Celebrity, Genre, Reviews, Profession
+from .forms import UserRegistrationForm, UserLoginForm, ReviewsForm, RatingForm
+from .models import Movie, Celebrity, Genre, Reviews, Profession, Rating
 
 
 class Index(ListView):
@@ -58,6 +60,11 @@ class MovieSingle(DetailView):
     template_name = 'app/moviesingle.html'
     context_object_name = 'movie'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['star_form'] = RatingForm()
+        return context
+
 
 class CelebrityList(ListView):
     ''' Список знаменитостей '''
@@ -78,6 +85,7 @@ class CelebritySingle(DetailView):
     model = Celebrity
     template_name = 'app/celebritysingle.html'
     context_object_name = 'celebrity'
+
 
 class FilterMoviesView(ListView):
     ''' Фильтрация фильмов '''
@@ -138,10 +146,10 @@ def user_logout(request):
     return redirect('login')
 
 
-def add_review(request, id):
+def add_review(request, slug):
     ''' Добавление отзывов '''
     form = ReviewsForm(request.POST)
-    movie = get_object_or_404(Movie, id=id)
+    movie = get_object_or_404(Movie, slug=slug)
 
     if form.is_valid():
         comment = Reviews()
@@ -150,19 +158,18 @@ def add_review(request, id):
         comment.text = form.cleaned_data['text']
         comment.save()
         return redirect(movie.get_absolute_url())
-    return render(request, 'app/moviesingle.html')
+    return redirect(movie.get_absolute_url())
 
 
 class FilterCelebritiesList(CelebrityList, ListView):
     ''' Фильтр знаменитостей '''
+
     def get_queryset(self):
         queryset = Celebrity.objects.filter(
             Q(name__icontains=self.request.GET.get('name')) |
             Q(profession__in=self.request.GET.getlist('professions'))
         )
         return queryset
-    # queryset = Movie.objects.filter(
-    #             Q(name__icontains=self.request.GET.get("Имя")) |
-    #             Q(genre__in=self.request.GET.getlist('genre')) |
-    #             Q(year__range=(int(self.request.GET.get('year1')), int(self.request.GET.get('year2'))))
-    #         )
+
+
+
