@@ -1,3 +1,4 @@
+{% load calc_avg_rating %}
 <div class="title-hd">
     <h2> Новинки </h2>
     <a href="{% url 'movies' %}" class="viewall">Все фильмы <i class="ion-ios-arrow-right"></i></a>
@@ -20,7 +21,7 @@
                                 </div>
                                 <div class="title-in">
                                     <h6><a href="{{ last_movie.get_absolute_url }}">{{ last_movie.name }}</a></h6>
-                                    <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                                    <p><i class="ion-android-star"></i><span>{% calc_avg_rating last_movie.id %}</span> / 5</p>
                                 </div>
                             </div>
                         </div>

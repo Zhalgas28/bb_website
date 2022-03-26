@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse_lazy
 
+
 class Genre(models.Model):
     ''' Жанры '''
     name = models.CharField('Имя', max_length=155)
@@ -48,13 +49,12 @@ class Celebrity(models.Model):
                                    verbose_name='Профессия')
     description = models.TextField('Описание')
     media = models.ManyToManyField(Media, related_name='celebrities', blank=True)
-    filmography = models.ManyToManyField('Movie', verbose_name='Фильмы с его участием', related_name='celebrities', blank=True)
+    filmography = models.ManyToManyField('Movie', verbose_name='Фильмы с его участием', related_name='celebrities',
+                                         blank=True)
     photo = models.ImageField(verbose_name='Фото', upload_to='photos/%Y/%m/%d')
     biography = models.TextField(verbose_name='Биография')
     date_of_birth = models.CharField('Дата рождения', max_length=155, help_text='Пример: "22 Июня, 2022 года')
     country = models.CharField(verbose_name='Страна', max_length=155, default='USA')
-
-
 
     def __str__(self):
         return self.name
@@ -81,7 +81,8 @@ class Movie(models.Model):
     photo = models.ImageField(upload_to='photos/%Y/%m/%d')
     description = models.TextField(verbose_name='Описание')
     created_at = models.DateTimeField(auto_now_add=True)
-    trailer = models.URLField(verbose_name='Трейлер', help_text='Введите ссылку трейлера', default='https://youtube.com')
+    trailer = models.URLField(verbose_name='Трейлер', help_text='Введите ссылку трейлера',
+                              default='https://youtube.com')
 
     def __str__(self):
         return self.name
@@ -129,9 +130,8 @@ class Reviews(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, verbose_name='Фильм')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Добавлено в')
 
-
     def __str__(self):
-        return f"{self.name} - {self.movie}"
+        return f"{self.user} - {self.movie}"
 
     class Meta:
         verbose_name = 'Отзыв'

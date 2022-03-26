@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load calc_avg_rating %}
 {% load popular_movies_main %}
 {% load last_movies %}
 {% block content %}
@@ -15,7 +16,7 @@
                             </div>
                             <div class="title-in">
                                 <h6><a href="{{ movie.get_absolute_url }}">{{ movie.name }}</a></h6>
-                                <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                                <p><i class="ion-android-star"></i><span>{% calc_avg_rating movie.id %}</span> / 5</p>
                             </div>
                         </div>
                     {% endfor %}

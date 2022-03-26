@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load calc_avg_rating %}
 
 {% block title %}Все фильмы | Киносайт{% endblock %}
 
@@ -42,7 +43,7 @@
                                 </div>
                                 <div class="mv-item-infor">
                                     <h6><a href="{{ movie.get_absolute_url }}">{{ movie.name }}</a></h6>
-                                    <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
+                                    <p class="rate"><i class="ion-android-star"></i><span>{% calc_avg_rating movie.id %}</span> / 5</p>
                                 </div>
                             </div>
                         {% endfor %}
