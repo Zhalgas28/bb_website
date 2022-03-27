@@ -43,8 +43,7 @@
                                         <div class="row">
                                             <div class="col-md-8 col-sm-12 col-xs-12">
                                                 <p>{{ celebrity.description }}</p>
-                                                <p class="time"><a href="#">Биография <i
-                                                        class="ion-ios-arrow-right"></i></a></p>
+                                                <p class="time"></p>
                                                 {% if celebrity.media %}
                                                     <div class="title-hd-sm">
                                                         <h4>Фотки</h4>
@@ -60,8 +59,7 @@
                                                 {% if celebrity.filmography %}
                                                     <div class="title-hd-sm">
                                                         <h4>Его фильмы</h4>
-                                                        <a href="#" class="time">Список фильмов<i
-                                                                class="ion-ios-arrow-right"></i></a>
+
                                                     </div>
                                                     <!-- movie cast -->
                                                     {% for film in celebrity.filmography.all %}

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% load calc_avg_rating %}
-{% load popular_movies_main %}
+{% load last_created_movies_main %}
 {% load last_movies %}
 {% block content %}
     <div class="slider movie-items">
@@ -29,7 +29,7 @@
         <div class="container">
             <div class="row ipad-width">
                 <div class="col-md-8">
-                    {% get_popular_movies_main %}
+                    {% get_last_created_movies_main %}
                     {% get_last_movies %}
                 </div>
                 <div class="col-md-4">

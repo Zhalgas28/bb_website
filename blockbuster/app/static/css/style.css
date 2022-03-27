@@ -5033,7 +5033,7 @@ ul {
 .movie_list .movie-item-style-2 img,
 .movie_single .movie-item-style-2 img,
 .userfav_list .movie-item-style-2 img {
-    width: 50%;
+    width: 30%;
 }
 
 @media (max-width: 767px) {
@@ -9905,6 +9905,7 @@ input[type="password"]:focus {
 
 input[type="submit"] {
     margin-top: 28px;
+    margin-bottom: 28px;
     width: 120px;
     height: 32px;
     background: #173c5b;
