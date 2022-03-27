@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load calc_avg_rating %}
+
 {% block title %}{{ movie.name }} | Киносайт{% endblock %}
 
 {% block content %}
@@ -219,25 +221,25 @@
                                         </div>
                                     </div>
                                     <div id="moviesrelated" class="tab">
-                                        <div class="row">
-                                            <div class="movie-item-style-2">
-                                                <img src="images/uploads/mv1.jpg" alt="">
-                                                <div class="mv-item-infor">
-                                                    <h6><a href="#">oblivion <span>(2012)</span></a></h6>
-                                                    <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10
-                                                    </p>
-                                                    <p class="describe">Earth's mightiest heroes must come together and
-                                                        learn to fight as a team if they are to stop the mischievous
-                                                        Loki
-                                                        and his alien army from enslaving humanity...</p>
-                                                    <p class="run-time"> Run Time: 2h21’ . <span>MMPA: PG-13 </span> .
-                                                        <span>Release: 1 May 2015</span></p>
-                                                    <p>Director: <a href="#">Joss Whedon</a></p>
-                                                    <p>Stars: <a href="#">Robert Downey Jr.,</a> <a href="#">Chris
-                                                        Evans,</a> <a href="#"> Chris Hemsworth</a></p>
+                                        {% for similar_movie in similar_movies %}
+                                            <div class="row">
+                                                <div class="movie-item-style-2">
+                                                    <img src="{{ similar_movie.photo.url }}" alt="">
+                                                    <div class="mv-item-infor">
+                                                        <h6><a href="{{ similar_movie.get_absolute_url }}">{{ similar_movie.name }} <span>({{ similar_movie.year }})</span></a></h6>
+                                                        <p class="rate"><i class="ion-android-star"></i><span>{% calc_avg_rating similar_movie.id %}</span>
+                                                            / 5
+                                                        </p>
+                                                        <p class="describe">{{ similar_movie.description | safe | truncatewords_html:35 }}</p>
+                                                        <p class="run-time"> Продолжительность: {{ similar_movie.run_time }}
+                                                            .
+                                                            <span>Релиз: {{ similar_movie.release }}</span></p>
+                                                        <p>Director: <a href="{{ similar_movie.director.get_absolute_url }}">{{ similar_movie.director.name }}</a></p>
+                                                        <p>Актеры: {% for actor in similar_movie.actors.all %}<a href="{{ actor.get_absolute_url }}">{{ actor.name }},</a>{% endfor %}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>

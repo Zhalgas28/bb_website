@@ -68,6 +68,11 @@ class MovieSingle(DetailView):
         context['star_form'] = RatingForm()
         context['avg'] = calc_avg_rating(self.object.id)
 
+        # Получение похожих фильмов
+        movie_tags_ids = self.object.genre.values_list('id', flat=True)
+        similar_movies = Movie.objects.filter(genre__in=movie_tags_ids).exclude(id=self.object.id)
+        context['similar_movies'] = similar_movies.annotate(same_genres=Count('genre')).order_by('-same_genres', '-created_at')[:4]
+
         return context
 
 

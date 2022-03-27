@@ -5033,7 +5033,7 @@ ul {
 .movie_list .movie-item-style-2 img,
 .movie_single .movie-item-style-2 img,
 .userfav_list .movie-item-style-2 img {
-    width: 30%;
+    width: 50%;
 }
 
 @media (max-width: 767px) {
@@ -5107,6 +5107,7 @@ ul {
     padding-bottom: 25px;
     border-bottom: 1px solid #405266;
     margin-bottom: 25px;
+    padding-right: 5px;
 }
 
 .movie-item-style-2 .mv-item-infor .run-time span {
