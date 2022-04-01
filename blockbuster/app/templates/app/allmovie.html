@@ -23,15 +23,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="topbar-filter fw">
-                        <p>Найдено <span>{{ count }} фильмов</span></p>
-                        <label>Сортировка по:</label>
-                        <select name="sort">
-                            <option value="popularity">Популярности</option>
-                            <option value="rating">Рейтингу</option>
-                            <option value="date">Дате выхода</option>
-                        </select>
-                    </div>
                     <div class="flex-wrap-movielist mv-grid-fw">
                         {% for movie in movies %}
                             <div class="movie-item-style-2 movie-item-style-1">
@@ -43,7 +34,9 @@
                                 </div>
                                 <div class="mv-item-infor">
                                     <h6><a href="{{ movie.get_absolute_url }}">{{ movie.name }}</a></h6>
-                                    <p class="rate"><i class="ion-android-star"></i><span>{% calc_avg_rating movie.id %}</span> / 5</p>
+                                    <p class="rate"><i
+                                            class="ion-android-star"></i><span>{% calc_avg_rating movie.id %}</span> / 5
+                                    </p>
                                 </div>
                             </div>
                         {% endfor %}
