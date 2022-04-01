@@ -166,12 +166,21 @@ def add_review(request, slug):
 class FilterCelebritiesList(CelebrityList, ListView):
     ''' Фильтр знаменитостей '''
 
+    # def get_queryset(self):
+    #     queryset = Celebrity.objects.filter(
+    #         Q(name__icontains=self.request.GET.get('name')) |
+    #         Q(profession__in=self.request.GET.getlist('professions'))
+    #     )
+    #     return queryset
+
     def get_queryset(self):
-        queryset = Celebrity.objects.filter(
-            Q(name__icontains=self.request.GET.get('name')) |
-            Q(profession__in=self.request.GET.getlist('professions'))
-        )
-        return queryset
+        kwargs = {}
+        if self.request.GET.get('name'):
+            kwargs['name__icontains'] = self.request.GET.get('name')
+        if self.request.GET.getlist('professions'):
+            kwargs['profession__in'] = self.request.GET.getlist('professions')
+
+        return Celebrity.objects.filter(**kwargs)
 
 
 class AddStarRating(View):

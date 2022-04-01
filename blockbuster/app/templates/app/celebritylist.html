@@ -35,6 +35,8 @@
                                     </div>
                                 </div>
                             </div>
+                        {% empty %}
+                            <h1 style="color: white">По этому запросу ничего не найдено</h1>
                         {% endfor %}
                     </div>
                     {% if page_obj.has_other_pages %}

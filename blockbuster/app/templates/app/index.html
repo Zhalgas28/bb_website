@@ -12,7 +12,8 @@
                     {% for movie in movies %}
                         <div class="movie-item">
                             <div class="mv-img">
-                                <a href="{{ movie.photo.url }}"><img src="{{ movie.photo.url }}" alt="" width="285" height="437"></a>
+                                <a href="{{ movie.photo.url }}"><img src="{{ movie.photo.url }}" alt="" width="285"
+                                                                     height="437"></a>
                             </div>
                             <div class="title-in">
                                 <h6><a href="{{ movie.get_absolute_url }}">{{ movie.name }}</a></h6>
@@ -38,14 +39,16 @@
                             <h4 class="sb-title">Знаменитости</h4>
                             {% for celebrity in celebrities %}
                                 <div class="celeb-item">
-                                    <a href="{{ celebrity.photo.url }}"><img src="{{ celebrity.photo.url }}" alt="" width="70" height="70"></a>
+                                    <a href="{{ celebrity.photo.url }}"><img src="{{ celebrity.photo.url }}" alt=""
+                                                                             width="70" height="70"></a>
                                     <div class="celeb-author">
                                         <h6><a href="{{ celebrity.get_absolute_url }}">{{ celebrity.name }}</a></h6>
                                         <span>{{ celebrity.profession }}</span>
                                     </div>
                                 </div>
                             {% endfor %}
-                            <a href="{% url 'celebritylist' %}" class="btn">Все знаменитости<i class="ion-ios-arrow-right"></i></a>
+                            <a href="{% url 'celebritylist' %}" class="btn">Все знаменитости<i
+                                    class="ion-ios-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
