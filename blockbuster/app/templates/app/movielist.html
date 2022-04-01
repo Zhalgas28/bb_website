@@ -29,7 +29,8 @@
                             <div class="mv-item-infor">
                                 <h6><a href="{{ movie.get_absolute_url }}">{{ movie.name }}
                                     <span>({{ movie.year }})</span></a></h6>
-                                <p class="rate"><i class="ion-android-star"></i><span>{% calc_avg_rating movie.id %}</span> / 5</p>
+                                <p class="rate"><i
+                                        class="ion-android-star"></i><span>{% calc_avg_rating movie.id %}</span> / 5</p>
                                 <p class="describe">{{ movie.description | safe | truncatewords_html:20 }}</p>
                                 <p class="run-time"> Продолжительность: {{ movie.run_time }}
                                     <span>Релиз: {{ movie.release_date | date:"d F Y" }}</span></p>
@@ -40,6 +41,8 @@
                                     | {% endfor %}</p>
                             </div>
                         </div>
+                    {% empty %}
+                        <h1 style="color: white">По этому запросу ничего не найдено</h1>
                     {% endfor %}
                     {% if page_obj.has_other_pages %}
                         <div class="topbar-filter">
@@ -62,16 +65,15 @@
                             <h4 class="sb-title">Search for movie</h4>
                             <form class="form-style-1" action="{% url 'filter_movies' %}" method="get">
                                 <div class="row">
-                                    <div class="col-md-12 form-it">
-                                        <label>Имя фильма</label>
-                                        <input type="text" name="Имя" placeholder="Название">
-                                    </div>
+                                    {#                                    <div class="col-md-12 form-it">#}
+                                    {#                                        <label>Имя фильма</label>#}
+                                    {#                                        <input type="text" name="name" placeholder="Название">#}
+                                    {#                                    </div>#}
                                     <div class="col-md-12 form-it">
                                         <label>Жанры</label>
                                         <div class="group-ip">
                                             <select
                                                     name="genre" multiple="" class="ui fluid dropdown">
-                                                <option value="range">Выберите жанры</option>
                                                 {% for genre in genres %}
                                                     <option value="{{ genre.id }}">{{ genre.name }}</option>
                                                 {% endfor %}
@@ -84,8 +86,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <select name="year1">
-                                                    <option value="range">От</option>
-                                                    <option value="1990">1990</option>
+                                                    <option value="1990" selected>1990</option>
                                                     <option value="2000">2000</option>
                                                     <option value="2010">2010</option>
                                                     <option value="2015">2015</option>
@@ -94,12 +95,11 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <select name="year2">
-                                                    <option value="range">До</option>
                                                     <option value="2000">2000</option>
                                                     <option value="2010">2010</option>
                                                     <option value="2015">2015</option>
                                                     <option value="2020">2020</option>
-                                                    <option value="2022">2022</option>
+                                                    <option value="2022" selected>2022</option>
                                                 </select>
                                             </div>
                                         </div>

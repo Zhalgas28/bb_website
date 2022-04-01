@@ -101,12 +101,15 @@ class FilterMoviesView(MovieList, ListView):
     ''' Фильтрация фильмов '''
 
     def get_queryset(self):
-        queryset = Movie.objects.filter(
-            Q(name__icontains=self.request.GET.get("Имя")) |
-            Q(genre__in=self.request.GET.getlist('genre')) |
-            Q(year__range=(int(self.request.GET.get('year1')), int(self.request.GET.get('year2'))))
-        )
-        return queryset
+        kwargs = {}
+        if self.request.GET.getlist("genre"):
+            kwargs["genre__in"] = self.request.GET.getlist("genre")
+
+        if self.request.GET.get("year1"):
+            kwargs["year__range"] = (self.request.GET.get("year1"), self.request.GET.get("year2"))
+
+        return Movie.objects.filter(**kwargs)
+
 
 
 def user_register(request):
