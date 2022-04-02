@@ -37,9 +37,9 @@
         <div class="right">
             <span class="loginwith">Sign up with<br/>social network</span>
 
-            <button class="social-signin facebook">Log up with facebook</button>
-            <button class="social-signin twitter">Log up with VK</button>
-            <button class="social-signin google">Log up with Google+</button>
+            <a href="{% url 'social:begin' 'facebook' %}"><button class="social-signin facebook">Log in with facebook</button></a>
+            <a href="/auth/login/vk-oauth2"><button class="social-signin twitter">Log in with VK</button></a>
+            <a><button class="social-signin google">Log in with Google+</button></a>
         </div>
         <div class="or">OR</div>
     </div>

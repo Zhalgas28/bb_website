@@ -67,11 +67,13 @@ DATABASES = {
     }
 }
 
-# Аутентификация через ВК
+# Аутентификация
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',  # бекенд авторизации через ВКонтакте
     'django.contrib.auth.backends.ModelBackend',  # бекенд классической аутентификации
+    'social_core.backends.google.GoogleOAuth2',  # бэкенд авторизации через Гугл
+    'social_core.backends.facebook.FacebookOAuth2',
 )
 
 SOCIAL_AUTH_POSTGRES_JSONFIELD = True
@@ -79,10 +81,15 @@ SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 SOCIAL_AUTH_VK_OAUTH2_KEY = '8124520'
 SOCIAL_AUTH_VK_OAUTH2_SECRET = '04RIW4ToA55Wid1mNdWy'
 
-LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
 
-# Password validation
-# https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
+SOCIAL_AUTH_FACEBOOK_KEY = '388750916403353'
+SOCIAL_AUTH_FACEBOOK_SECRET = '55b14ced28b3c6511a95fef738da2e1b'
+
+# SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+
+LOGIN_REDIRECT_URL = '/'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
