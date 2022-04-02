@@ -8,7 +8,8 @@ import debug_toolbar
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app.urls')),
-    path('contact/', include('contact.urls'))
+    path('contact/', include('contact.urls')),
+    path('auth/', include('social_django.urls'))
 ]
 
 if settings.DEBUG:

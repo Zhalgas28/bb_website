@@ -1354,6 +1354,7 @@ input[type="date"],
 input[type="month"],
 input[type="time"],
 input[type="week"],
+input[type="search"],
 input[type="number"],
 input[type="email"],
 input[type="url"],
@@ -9996,7 +9997,7 @@ button.social-signin.facebook {
 }
 
 button.social-signin.twitter {
-    background: #55ACEE;
+    background: #2F6691;
 }
 
 button.social-signin.google {
