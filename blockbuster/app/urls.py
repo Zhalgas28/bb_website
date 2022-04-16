@@ -15,5 +15,6 @@ urlpatterns = [
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),
     path('addreview/<str:slug>/', add_review, name='addreview'),
-    path('addrating/', AddStarRating.as_view(), name='addrating')
+    path('addrating/', AddStarRating.as_view(), name='addrating'),
+    path('delete_review/<int:pk>/', delete_review, name='delete_review')
 ]

@@ -163,6 +163,8 @@
                                                     </div>
                                                     <p>{{ review.text }}</p>
                                                     <div>
+                                                        <input type="hidden" name="movie" value="{{ movie }}">
+                                                        <a href="{% url 'delete_review' review.id %}">Удалить</a>
                                                         <p class="time">
                                                             {{ review.created_at }}
                                                         </p>

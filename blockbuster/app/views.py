@@ -205,3 +205,11 @@ class AddStarRating(View):
             return HttpResponse(status=201)
         else:
             return HttpResponse(status=400)
+
+
+def delete_review(request, pk):
+    review = Reviews.objects.get(pk=pk)
+    review.delete()
+
+    return redirect('home')
+
